@@ -1,4 +1,4 @@
-@extends('layout')
+{{-- @extends('layout')
 
 @section('content')
     <article>
@@ -6,4 +6,12 @@
     </article>
 
     <a href="/">Go back</a>
-@endsection
+@endsection --}}
+
+<x-layout>
+    <article>
+        {!! $post !!}
+    </article>
+
+    <a href="/">Go back</a>
+</x-layout>
