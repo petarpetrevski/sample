@@ -1,7 +1,15 @@
-<x-layout>\
+<x-layout>
     @foreach ($posts as $post)
     <article>
-        {!! $post !!}
+        <h1>
+            <a href="/posts/{{ $post->id }}">
+                {{ $post->title }}
+            </a>
+        </h1>
+
+        <div>
+            {{ $post->excerpt }}
+        </div>
     </article>
-    @endforeach\
+    @endforeach
 </x-layout>
