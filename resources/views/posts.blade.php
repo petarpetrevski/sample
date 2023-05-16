@@ -6,6 +6,14 @@
                 {{ $post->title }}
             </a>
         </h1>
+
+        <p>
+            By <a href="/author/{{ $post->author->username }}">{{ $post->author->name }}</a> in
+            <a href="/category/{{ $post->category->slug }}">
+                {{ $post->category->name }}
+            </a>
+        </p>
+
         <p>
             <a href="/category/{{ $post->category->slug }}">
                 {{ $post->category->name }}

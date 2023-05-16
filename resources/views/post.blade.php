@@ -5,6 +5,7 @@
         </h1>
 
         <p>
+            By <a href="#">{{ $post->author->username }}</a> in
             <a href="/category/{{ $post->category->slug }}">
                 {{ $post->category->name }}
             </a>
