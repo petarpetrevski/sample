@@ -7,7 +7,7 @@
         @foreach ($posts->skip(1) as $post)
         <x-post-card
             :post="$post"
-            class=" {{ $loop->iteration < 4 ? 'col-span-2' : 'col-span-3' }}"/>
+            class=" {{ $loop->iteration > 2 ? 'col-span-2' : 'col-span-3' }}"/>
         @endforeach
     </div>
 @endif
