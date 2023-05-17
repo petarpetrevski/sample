@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
@@ -20,24 +21,35 @@ use Illuminate\Support\Facades\Route;
 //     return view('posts');
 // });
 
-Route::get('/', function () {
-    return view('posts', [
-        // 'posts' => Post::all()
+// Without Controller:
+// Route::get('/', function () {
+//     $posts = Post::latest();
 
-        // fixing n+1 problem with eager loading
-        // 'posts' => Post::latest()->with('category', 'author')->get()
+//     if (request('search')) {
+//         $posts
+//             ->where('title', 'like', '%' . request('search') . '%')
+//             ->orWhere('body', 'like', '%' . request('search') . '%');
+//     }
 
-        // fixing using with property in the model
-        'posts' => Post::latest()->get(),
-        'categories' => Category::all()
-    ]);
-})->name('home');
+//     return view('posts', [
+//         // 'posts' => Post::all()
 
-Route::get('/post/{post:slug}', function (Post $post) {
-    return view('post', [
-        'post' => $post
-    ]);
-});
+//         // fixing n+1 problem with eager loading
+//         // 'posts' => Post::latest()->with('category', 'author')->get()
+
+//         // fixing using with property in the model
+//         // 'posts' => Post::latest()->get(),
+
+
+//         'posts' => $posts->get(),
+//         'categories' => Category::all()
+//     ]);
+// })->name('home');
+
+// extracting to controller, using the action: index
+Route::get('/', [PostController::class, 'index'])->name('home');
+
+Route::get('/post/{post:slug}', [PostController::class, 'show']);
 
 Route::get('/category/{category:slug}', function (Category $category) {
     return view('posts', [
