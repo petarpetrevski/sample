@@ -12,7 +12,12 @@ class PostController extends Controller
         return view('posts.index', [
 
             // Using query scope
-            'posts' => Post::latest()->filter(request(['search', 'category', 'author']))->get()
+            'posts' => Post::latest()->filter(
+                request(['search', 'category', 'author'])
+                // )->get()
+                // )->simplePaginate(6)
+                // )->paginate(6)
+                )->paginate(6)->withQueryString() // keeps any passed query strings
         ]);
     }
 

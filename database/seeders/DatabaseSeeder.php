@@ -22,12 +22,12 @@ class DatabaseSeeder extends Seeder
         // Category::truncate();
 
         $user = User::factory()->create([
-            'name' => 'Petar Petrevski',
-            'username' => 'petarpetrevski'
+            // 'name' => 'Petar Petrevski',
+            // 'username' => 'petarpetrevski'
         ]);
 
         Post::factory(10)->create([
-            'user_id' => $user->id
+            // 'user_id' => $user->id
         ]);
 
 
