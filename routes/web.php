@@ -17,6 +17,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
+
+// extracting to controller, using the action: index
+Route::get('/', [PostController::class, 'index'])->name('home');
+
+Route::get('/post/{post:slug}', [PostController::class, 'show']);
+
+
+
+
 // Route::get('/', function () {
 //     return view('posts');
 // });
@@ -46,10 +57,6 @@ use Illuminate\Support\Facades\Route;
 //     ]);
 // })->name('home');
 
-// extracting to controller, using the action: index
-Route::get('/', [PostController::class, 'index'])->name('home');
-
-Route::get('/post/{post:slug}', [PostController::class, 'show']);
 
 // Route::get('/category/{category:slug}', function (Category $category) {
 //     return view('posts', [
@@ -60,9 +67,9 @@ Route::get('/post/{post:slug}', [PostController::class, 'show']);
 //     ]);
 // })->name('category');
 
-Route::get('/author/{author:username}', function (User $author) {
-    return view('posts', [
-        'posts' => $author->posts,
-        // 'categories' => Category::all() // we don't need to pass categories to the view anymore, using CategoryDropdown component
-    ]);
-});
+// Route::get('/author/{author:username}', function (User $author) {
+//     return view('posts.show', [
+//         'posts' => $author->posts,
+//         // 'categories' => Category::all() // we don't need to pass categories to the view anymore, using CategoryDropdown component
+//     ]);
+// });
