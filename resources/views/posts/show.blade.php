@@ -9,14 +9,15 @@
                         Published <time>{{ $post->created_at->diffForHumans() }}</time>
                     </p>
 
-                    <div class="flex items-center lg:justify-center text-sm mt-4">
-                        <img src="/images/lary-avatar.svg" alt="Lary avatar">
-                        <div class="ml-3 text-left">
-                            <a href="/?author={{ $post->author->username }}">
+                    <a href="/?author={{ $post->author->username }}" class="hover:text-blue-500">
+                        <div class="flex items-center lg:justify-center text-sm mt-4">
+                            {{-- <img src="/images/lary-avatar.svg" alt="Lary avatar"> --}}
+                            <img src="https://i.pravatar.cc/100?u={{ $post->author->id }}" alt="" width="60" height="60" class="rounded-xl">
+                            <div class="ml-3 text-left">
                                 <h5 class="font-bold">{{ $post->author->name }}</h5>
-                            </a>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
 
                 <div class="col-span-8">
@@ -52,6 +53,22 @@
                         {!! $post->body !!}
                     </div>
                 </div>
+
+                <section class="col-span-8 col-start-5 mt-10 space-y-6">
+                    @include('posts._add-comment-form')
+                </section>
+
+                <section class="col-span-8 col-start-5 mt-10 space-y-6">
+
+                    @if ($post->comments->count())
+                        @foreach ($post->comments as $comment)
+                            <x-post-comment :comment='$comment' />
+                        @endforeach
+                    @else
+                        <p class="text-center">No comments yet.</p>
+                    @endif
+
+                </section>
             </article>
         </main>
     </section>

@@ -31,14 +31,14 @@
             </div>
 
             <footer class="flex justify-between items-center mt-8">
-                <div class="flex items-center text-sm">
-                    <img src="/images/lary-avatar.svg" alt="Lary avatar">
-                    <div class="ml-3">
-                        <a href="/?author={{ $post->author->username }}">
+                <a href="/?author={{ $post->author->username }}" class="hover:text-blue-500">
+                    <div class="flex items-center text-sm">
+                        <img src="https://i.pravatar.cc/100?u={{ $post->author->id }}" alt="" width="60" height="60" class="rounded-xl">
+                        <div class="ml-3">
                             <h5 class="font-bold">{{ $post->author->name }}</h5>
-                        </a>
+                        </div>
                     </div>
-                </div>
+                </a>
 
                 <div>
                     <a href="/post/{{ $post->slug }}"

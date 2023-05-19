@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionController;
@@ -23,11 +24,15 @@ use Illuminate\Support\Facades\Route;
 
 
 // extracting to controller, using the action: index
-// get all posts
+// posts
 Route::get('/', [PostController::class, 'index'])->name('home');
-
-// show single post
 Route::get('/post/{post:slug}', [PostController::class, 'show']);
+
+Route::get('/admin/post/create', [PostController::class, 'create'])->middleware('admin');
+Route::post('/admin/post', [PostController::class, 'store'])->middleware('admin');
+
+// comments
+Route::post('/post/{post:slug}/comments', [CommentController::class, 'store']);
 
 // registering
 Route::get('register', [RegisterController::class, 'create'])->middleware('guest');
