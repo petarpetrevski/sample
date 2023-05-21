@@ -1,13 +1,16 @@
 <?php
 
-use App\Http\Controllers\CommentController;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\SessionController;
-use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Category;
+use App\Services\Newsletter;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\SessionController;
+use App\Http\Controllers\RegisterController;
+use Illuminate\Validation\ValidationException;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +36,9 @@ Route::post('/admin/post', [PostController::class, 'store'])->middleware('admin'
 
 // comments
 Route::post('/post/{post:slug}/comments', [CommentController::class, 'store']);
+
+// newsletter
+Route::post('newsletter', NewsletterController::class);
 
 // registering
 Route::get('register', [RegisterController::class, 'create'])->middleware('guest');

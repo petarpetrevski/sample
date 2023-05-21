@@ -31,4 +31,13 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'mailchimp' => [
+        // db10378a6db255cdcb88d9b5b326767a-us21
+        // fce6820aa9
+        'key' => env('MAILCHIMP_KEY'),
+        'lists' => [
+            'subscribers' => env('MAILCHIMP_LIST_SUBSCRIBERS')
+        ]
+    ]
+
 ];
