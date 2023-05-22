@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminPostController;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
@@ -31,8 +32,20 @@ use Illuminate\Validation\ValidationException;
 Route::get('/', [PostController::class, 'index'])->name('home');
 Route::get('/post/{post:slug}', [PostController::class, 'show']);
 
-Route::get('/admin/post/create', [PostController::class, 'create'])->middleware('admin');
-Route::post('/admin/post', [PostController::class, 'store'])->middleware('admin');
+// admin
+Route::middleware('can:admin')->group(function () {
+
+    // Route::resource('admin/post', AdminPostController::class)->except('show'); // this would automatically create all the routes below
+
+    Route::get('/admin/post', [AdminPostController::class, 'index']);
+    Route::post('/admin/post', [AdminPostController::class, 'store']);
+    Route::get('/admin/post/create', [AdminPostController::class, 'create']);
+    Route::get('/admin/post/{post}/edit', [AdminPostController::class, 'edit']);
+    Route::patch('/admin/post/{post}', [AdminPostController::class, 'update']);
+    Route::delete('/admin/post/{post}', [AdminPostController::class, 'destroy']);
+});
+
+
 
 // comments
 Route::post('/post/{post:slug}/comments', [CommentController::class, 'store']);
